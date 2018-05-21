@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ArskomProject</title>
+    <meta name="description" content="Chat application build thanks to polymer 3.0">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="/manifest.json">
+
+    <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <!-- Import of all my object as modules -->
+    <script type="module" src="/src/chat-button-send.js"></script>
+    <script type="module" src="/src/chat-bubble.js"></script>
+    <script type="module" src="/src/chat-screen.js"></script>
+    <script type="module" src="/src/chat-text-entry.js"></script>
+
+  </head>
+
+  <body>
+    
+    <chat-screen></chat-screen>
+    <chat-text-entry></chat-text-entry>
+
+  </body>
+
+</html>

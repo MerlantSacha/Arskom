@@ -1,0 +1,7 @@
+{
+  "name": "ArskomProject",
+  "short_name": "ArskomProject",
+  "description": "Chat application build thanks to polymer 3.0",
+  "start_url": "/",
+  "display": "standalone"
+}
