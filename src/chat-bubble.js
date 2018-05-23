@@ -5,12 +5,17 @@ import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
  * @polymer
  */
 class ChatBubble extends PolymerElement {
+  
   static get template() {
     return html`
+
+      <!-- styling the bubbles according to their class -->
       <style>
         :host {
           display: block;
         }
+      .ours { background: #98fb98; }
+      .theirs { background: #d3d3d3; }
       </style>
       
       <!-- data binding , lines that will be placed in the ul of chatscreen -->
@@ -20,6 +25,7 @@ class ChatBubble extends PolymerElement {
     `;
   }
   
+  // properties linked to bubbles' attributes
   static get properties() {
     return {
       msg: {
@@ -33,11 +39,9 @@ class ChatBubble extends PolymerElement {
     };
   }
 
-  // Constructor that will allow to create new chat bubbles with a message in it
-  constructor(message,classe){
+  
+  constructor(){
     super();
-    this.msg=message;
-    this.owner=classe;
   }
 
 }

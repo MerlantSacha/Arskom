@@ -2,9 +2,11 @@
   "name": "ArskomProject",
   "description": "Chat application build thanks to polymer 3.0",
   "dependencies": {
+    "@polymer/lit-element": "^0.5.1",
     "@polymer/paper-button": "^3.0.0-pre.19",
     "@polymer/paper-input": "^3.0.0-pre.19",
     "@polymer/polymer": "^3.0.0",
+    "jquery": "^3.3.1",
     "paper-button": "0.0.0",
     "paper-input": "^3.0.2"
   },
