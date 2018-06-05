@@ -19,9 +19,9 @@ class ChatBubble extends PolymerElement {
       </style>
       
       <!-- data binding , lines that will be placed in the ul of chatscreen -->
-      <li class =[[owner]]>
+      <div class =[[owner]]>
         [[msg]]
-      </li>
+      </div>
     `;
   }
   

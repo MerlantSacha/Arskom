@@ -1,4 +1,5 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-input/iron-input.js';
 
 /**
  * @customElement
@@ -11,18 +12,28 @@ class MyApp extends PolymerElement {
     return html`
       <style>
         :host {
-          display: block;
+          height: 100vh;
+          display: flex;
+         flex-direction: column;
         }
+        iron-list {
+          flex: 1 1 auto;
+         }
       </style>
 
       <!-- The first part of our page, the screen which will show all messages (bubbles) -->
-      <chat-screen>{{chatscreen}}</chat-screen>
+      <!-- <chat-screen>{{chatscreen}}</chat-screen> -->
+      <iron-list items={{myList}}>
+        <template>
 
-      <!-- Second part : willshow a paper-input and a paper-button which will allow us to type some text and send it to be caught and shown into the screen  -->
-      <form action="">
-        <chat-text-entry>{{chatentry}}</chat-text-entry>
-        <chat-button-send on-click="send"></chat-button-send> <!-- on a click event the button will trigger the 'send' function  -->
-      </form>
+        <div>...</div>
+
+       </template>
+      </iron-list>
+
+        <iron-input  bind-value="{{value}}">
+          <input type='text'><chat-button-send on-click="send"></chat-button-send> <!-- on a click event the button will trigger the 'send' function  -->
+        </iron-input>
 
     `;
   }
@@ -31,24 +42,27 @@ static get properties() {
   var screen = document.createElement('chat-screen');
   var entry = document.createElement('chat-text-entry');
     return {
-      chatscreen: {
-        type: customElements,
-        value : screen
+      myList: {
+        type: Array
       },
-      chatentry: {
-        type: customElements,
-        value : entry
+      value: {
+        type: String
       }
     };
   }
 
-  // Function that will take care of sending the new messgae to the screen (then will be add a functionality which will set up the input to "" again)
   send(){
+    console.log(this.value);
     var newBubble = document.createElement('chat-bubble');
-    newBubble.msg = this.chatentry.getInput();
-    newBubble.owner = "ours";
-    this.chatscreen.Add(newBubble);
+    newBubble.msg = this.value;
+    this.value="";
+    this.push('myList', newBubble);
   }
+
+  // Function that will take care of sending the new messgae to the screen (then will be add a functionality which will set up the input to "" again)
+  /*send(){
+    console.log(this.chatentry.go());
+  }*/
 
   constructor(){
     super();

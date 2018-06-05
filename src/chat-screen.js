@@ -1,5 +1,7 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import '/src/chat-bubble.js';
+import '@polymer/iron-list/iron-list.js';
+
 
 /**
  * @customElement
@@ -19,15 +21,23 @@ class ChatScreen extends PolymerElement {
       </style>
 
       <!-- List which will be filled with chat bublles -->
-      <ul id="message">
+      <iron-list items={{myList}}>
       
-      </ul>
+      </iron-list>
     `;
+  }
+
+    static get properties() {
+    return {
+      myList: {
+        type: Array
+      }
+    };
   }
 
   // Function that takes a ChatBubble as parameter and which add this bubble into the list
   Add(bubble){
-    
+    this.push('myList', bubble);
   }
 
   constructor(){
