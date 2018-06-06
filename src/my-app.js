@@ -12,52 +12,67 @@ class MyApp extends PolymerElement {
     return html`
       <style>
         :host {
-          height: 100vh;
-          display: flex;
-         flex-direction: column;
+          display: block;
         }
-        iron-list {
-          flex: 1 1 auto;
-         }
+        div {
+        	background-color: #f8f8f8;
+        }
+        paper-button.custom {
+		    background-color : #eeffee;
+		    };
+		}
       </style>
 
-      <!-- The first part of our page, the screen which will show all messages (bubbles) -->
-      <!-- <chat-screen>{{chatscreen}}</chat-screen> -->
-      <iron-list items={{myList}}>
-        <template>
+     <paper-dialog-impl id="myDialog">
+	  <h2>Arskom Project</h2>
+	  <h4>chat-app</h4>
+	  <div class="my-content-wrapper">
+	    <paper-dialog-scrollable bind-value="{{msg}}">
+	      {{msg}}
+	    </paper-dialog-scrollable>
+	  </div>
+	</paper-dialog-impl>
 
-        <div>...</div>
-
-       </template>
-      </iron-list>
-
-        <iron-input  bind-value="{{value}}">
-          <input type='text'><chat-button-send on-click="send"></chat-button-send> <!-- on a click event the button will trigger the 'send' function  -->
-        </iron-input>
+	<iron-input id="input" bind-value="{{value}}">
+	<input type='text'><paper-button raised class="custom indigo" on-tap="send">Send</paper-button>
+	</iron-input>
 
     `;
   }
 
 static get properties() {
-  var screen = document.createElement('chat-screen');
-  var entry = document.createElement('chat-text-entry');
     return {
-      myList: {
-        type: Array
-      },
       value: {
-        type: String
+      	type: String,
+      	value: ""
+      },
+      msg: {
+      	type: Array,
+      	value: ["hello"]
+      },
+      nb: {
+      	type: Number,
+      	value: 0
       }
     };
   }
 
   send(){
     console.log(this.value);
-    var newBubble = document.createElement('chat-bubble');
-    newBubble.msg = this.value;
+    this.push('msg',this.value);
+    this.push('msg', this.dialogText(this.nb));
+    this.nb = this.nb+1;
     this.value="";
-    this.push('myList', newBubble);
   }
+
+  dialogText(n){
+  	var list = ['how are you ?', 'Great !', 'random msg'];
+  	if (n>=list.length){
+  		n=list.length-1;
+  	}
+  	return(list[n]);
+  }
+
 
   // Function that will take care of sending the new messgae to the screen (then will be add a functionality which will set up the input to "" again)
   /*send(){
