@@ -18,7 +18,7 @@ class MyApp extends PolymerElement {
         	background-color: #f8f8f8;
         }
         paper-button.custom {
-		    background-color : #eeffee;
+		    background-color : #efefff;
 		    };
 		}
       </style>
@@ -28,7 +28,7 @@ class MyApp extends PolymerElement {
 	  <h4>chat-app</h4>
 	  <div class="my-content-wrapper">
 	    <paper-dialog-scrollable bind-value="{{msg}}">
-	      {{msg}}
+	      [[msg]]
 	    </paper-dialog-scrollable>
 	  </div>
 	</paper-dialog-impl>
@@ -48,36 +48,19 @@ static get properties() {
       },
       msg: {
       	type: Array,
-      	value: ["hello"]
-      },
-      nb: {
-      	type: Number,
-      	value: 0
+      	value: ["hello"],
+      	notify: true,
+      	reflectToAttribute: true
       }
     };
   }
 
   send(){
     console.log(this.value);
+    this.pop('msg');
     this.push('msg',this.value);
-    this.push('msg', this.dialogText(this.nb));
-    this.nb = this.nb+1;
     this.value="";
   }
-
-  dialogText(n){
-  	var list = ['how are you ?', 'Great !', 'random msg'];
-  	if (n>=list.length){
-  		n=list.length-1;
-  	}
-  	return(list[n]);
-  }
-
-
-  // Function that will take care of sending the new messgae to the screen (then will be add a functionality which will set up the input to "" again)
-  /*send(){
-    console.log(this.chatentry.go());
-  }*/
 
   constructor(){
     super();
