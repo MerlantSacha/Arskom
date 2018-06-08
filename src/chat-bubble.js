@@ -14,14 +14,17 @@ class ChatBubble extends PolymerElement {
         :host {
           display: block;
         }
-      .ours { background: #98fb98; }
-      .theirs { background: #d3d3d3; }
+        #ours{
+         background: #aaeeaa; 
+         text-align: right;
+        }
+        #theirs{
+         background: #aaaaff; 
+         text-align: left;
+        }
       </style>
       
-      <!-- data binding , lines that will be placed in the ul of chatscreen -->
-      <li class =[[owner]]>
-        [[msg]]
-      </li>
+        <div bind-value="{{msg}}" id="{{owner}}">{{msg}}</div> <!-- Binding the value so when it will be created the properties will reflect to this attribute -->
     `;
   }
   
@@ -30,11 +33,11 @@ class ChatBubble extends PolymerElement {
     return {
       msg: {
         type: String,
-        value: 'default value, set here just to get something on my screen'
+        value: "random"
       },
       owner: {
         type: String,
-        value: 'theirs'
+        value: "theirs"
       }
     };
   }

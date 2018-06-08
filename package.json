@@ -2,6 +2,7 @@
   "name": "ArskomProject",
   "description": "Chat application build thanks to polymer 3.0",
   "dependencies": {
+    "@polymer/iron-list": "^3.0.0-pre.19",
     "@polymer/lit-element": "^0.5.1",
     "@polymer/paper-button": "^3.0.0-pre.19",
     "@polymer/paper-input": "^3.0.0-pre.19",

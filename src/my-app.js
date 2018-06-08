@@ -1,4 +1,8 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+// By security I import everything (but not necessary because it's done in index.html and it won't load again : it's well build)
+import '@polymer/iron-input/iron-input.js';
+import '/src/chat-screen.js';
+import '/src/chat-text-entry.js';
 
 /**
  * @customElement
@@ -13,45 +17,48 @@ class MyApp extends PolymerElement {
         :host {
           display: block;
         }
+        chat-screen {
+          height: 500px;
+        }
       </style>
 
-      <!-- The first part of our page, the screen which will show all messages (bubbles) -->
-      <chat-screen>{{chatscreen}}</chat-screen>
-
-      <!-- Second part : willshow a paper-input and a paper-button which will allow us to type some text and send it to be caught and shown into the screen  -->
-      <form action="">
-        <chat-text-entry>{{chatentry}}</chat-text-entry>
-        <chat-button-send on-click="send"></chat-button-send> <!-- on a click event the button will trigger the 'send' function  -->
-      </form>
 
     `;
   }
 
-static get properties() {
-  var screen = document.createElement('chat-screen');
-  var entry = document.createElement('chat-text-entry');
-    return {
-      chatscreen: {
-        type: customElements,
-        value : screen
-      },
-      chatentry: {
-        type: customElements,
-        value : entry
+  open(){
+    var shr = this.attachShadow({mode: 'open'});
+    var screen = document.createElement('chat-screen');
+    var entry = document.createElement('chat-text-entry');
+    var button = document.createElement('chat-button-send');
+    this.shadowRoot.appendChild(screen);
+    this.shadowRoot.appendChild(entry);
+    this.shadowRoot.appendChild(button);
+    button.addEventListener("click", function () {
+      var greeting1 = new RegExp(".*(hello)|(hi).*");
+      var askState = new RegExp(".*(how are you)|(hry)|(how r u)|(howdy).*?.*");
+      var state = new RegExp(".*(fine)|(great)|(good).*");
+      if( greeting1.test(entry.value.toLowerCase()) ){
+        screen.add('ours',entry.send());
+        screen.add('theirs','Hello Burak !');
+      }else if( askState.test(entry.value.toLowerCase()) ){
+        screen.add('ours',entry.send());
+        screen.add('theirs','I\'m fine and you ?');
+      }else if( state.test(entry.value.toLowerCase()) ){
+        screen.add('ours',entry.send());
+        screen.add('theirs','Happy to hear so !');
+      }else{
+        screen.add('ours',entry.send());
+        screen.add('theirs','I do not understand this message. My test function should be improved, sorry');
       }
-    };
+      
+    });
   }
 
-  // Function that will take care of sending the new messgae to the screen (then will be add a functionality which will set up the input to "" again)
-  send(){
-    var newBubble = document.createElement('chat-bubble');
-    newBubble.msg = this.chatentry.getInput();
-    newBubble.owner = "ours";
-    this.chatscreen.Add(newBubble);
-  }
 
   constructor(){
     super();
+    this.open();
   }
   
 }

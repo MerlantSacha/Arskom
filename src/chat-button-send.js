@@ -19,7 +19,7 @@ class ChatButtonSend extends PolymerElement {
       </style>
 
       <!-- Paper button that will be used to send the message typed in the chat text entry -->
-      <paper-button toggles raised class="grey">[[text]]</paper-button>
+      <paper-button toggles raised class="grey">Send</paper-button>
 
     `;
   }
@@ -27,10 +27,7 @@ class ChatButtonSend extends PolymerElement {
   // Data binding : We can choose any text in this button
   static get properties() {
     return {
-      text: {
-        type: String,
-        value: 'Send' // default value
-      }
+      
     };
   }
 
